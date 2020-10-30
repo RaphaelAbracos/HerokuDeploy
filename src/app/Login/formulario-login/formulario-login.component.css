@@ -1,0 +1,67 @@
+body {
+    font-family: "Lato", sans-serif;
+}
+.roxo{
+    height: 100vh; 
+    background-color: #382465;
+    overflow-x: hidden;
+}
+
+.texto-principal{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.texto-principal h2{
+    font-weight: 300;
+}
+
+.texto-principal p{
+   margin-top: 60px;
+}
+
+.links{
+margin-left: 15px;
+float: right;
+padding:2px;
+color:#817f81;
+}
+
+.btn-login{
+    background-color: #6340B2;
+    color: #fff;
+    margin-top: 40px;
+    padding: 8px;
+    float: right;   
+}
+
+@media screen and (max-width: 764px) {
+    .login-form{
+        margin-top: 40%;
+    }
+.roxo{
+
+    height: 50vh; 
+}
+
+.links{
+    font-size:12px;
+    
+    }
+.texto-principal h2{
+    font-size: 30px;
+}
+}
+
+@media screen and (min-width: 768px){
+  
+.texto-principal h2{
+    font-size: 60px;
+}
+.btn-login{
+
+    padding: 15px;
+
+}
+}
