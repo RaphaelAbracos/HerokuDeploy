@@ -3,11 +3,11 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar><mat-icon>home</mat-icon>⠀Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="cadastro">Cadastrar</a>
-      <a mat-list-item routerLink="excluir">Excluir</a>
-      <a mat-list-item routerLink="">Meus Lembretes</a>
+      <a mat-list-item routerLink="cadastro"><mat-icon>event_available</mat-icon>⠀Cadastrar</a>
+      <a mat-list-item routerLink="excluir"><mat-icon>event_busy</mat-icon>⠀Excluir</a>
+      <a mat-list-item routerLink=""><mat-icon>event_note</mat-icon>⠀Meus Lembretes</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
