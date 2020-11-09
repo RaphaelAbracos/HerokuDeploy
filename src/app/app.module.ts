@@ -18,6 +18,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CadastroLembreteComponent } from './dashboard/cadastro-lembrete/cadastro-lembrete.component';
 import { routing } from './app.routing';
 import { ExcluirLembreteComponent } from './dashboard/excluir-lembrete/excluir-lembrete.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import { RootComponentComponent } from './root-component/root-component.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { ExcluirLembreteComponent } from './dashboard/excluir-lembrete/excluir-l
     DbContentComponent,
     CadastroLembreteComponent,
     ExcluirLembreteComponent,
+    RootComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,9 @@ import { ExcluirLembreteComponent } from './dashboard/excluir-lembrete/excluir-l
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
     routing
   ],
   providers: [],
