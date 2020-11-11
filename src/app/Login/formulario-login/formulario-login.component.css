@@ -26,6 +26,9 @@ margin-left: 15px;
 float: right;
 padding:2px;
 color:#817f81;
+border:none!important;
+background-color: white!important;
+text-decoration:none; 
 }
 
 .btn-login{
