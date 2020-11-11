@@ -27,15 +27,27 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import { RootComponentComponent } from './root-component/root-component.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     FormularioLoginComponent,
+ PopupCadastro
     ExcluirLembreteComponent,
     FormularioCadastroComponent,
     MenuComponent,
     DbContentComponent,
     CadastroLembreteComponent
+
+    MenuComponent,
+    DbContentComponent,
+    CadastroLembreteComponent,
+    ExcluirLembreteComponent,
+    RootComponentComponent,
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -47,6 +59,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
+
     MatToolbarModule,
     BrowserModule,
     ReactiveFormsModule,
@@ -54,6 +67,10 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
     routing
   ],
   providers: [CadastroService],
