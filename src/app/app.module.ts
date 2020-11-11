@@ -22,12 +22,8 @@ import { ExcluirLembreteComponent } from './dashboard/excluir-lembrete/excluir-l
 import { FormularioCadastroComponent } from './cadastro/formulario-cadastro/formulario-cadastro.component';
 import { CadastroService } from './shared/cadastro.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 
-
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { RootComponentComponent } from './root-component/root-component.component';
 
@@ -35,12 +31,11 @@ import { RootComponentComponent } from './root-component/root-component.componen
   declarations: [
     AppComponent,
     FormularioLoginComponent,
- PopupCadastro
     ExcluirLembreteComponent,
     FormularioCadastroComponent,
     MenuComponent,
     DbContentComponent,
-    CadastroLembreteComponent
+    CadastroLembreteComponent,
 
     MenuComponent,
     DbContentComponent,
