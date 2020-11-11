@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { FormularioLoginComponent } from './Login/formulario-login/formulario-login.component';
@@ -18,6 +19,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CadastroLembreteComponent } from './dashboard/cadastro-lembrete/cadastro-lembrete.component';
 import { routing } from './app.routing';
 import { ExcluirLembreteComponent } from './dashboard/excluir-lembrete/excluir-lembrete.component';
+import { FormularioCadastroComponent } from './cadastro/formulario-cadastro/formulario-cadastro.component';
+import { CadastroService } from './shared/cadastro.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
+
+
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { RootComponentComponent } from './root-component/root-component.component';
@@ -26,17 +35,23 @@ import { RootComponentComponent } from './root-component/root-component.componen
   declarations: [
     AppComponent,
     FormularioLoginComponent,
+ PopupCadastro
+    ExcluirLembreteComponent,
+    FormularioCadastroComponent,
+    MenuComponent,
+    DbContentComponent,
+    CadastroLembreteComponent
+
     MenuComponent,
     DbContentComponent,
     CadastroLembreteComponent,
     ExcluirLembreteComponent,
     RootComponentComponent,
+
   ],
   imports: [
-    BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
-    MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
@@ -44,12 +59,22 @@ import { RootComponentComponent } from './root-component/root-component.componen
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
+
+    MatToolbarModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
     routing
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [CadastroService],
+  bootstrap: [AppComponent],
+  entryComponents: [FormularioCadastroComponent]
 })
 export class AppModule { }

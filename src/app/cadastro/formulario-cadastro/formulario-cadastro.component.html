@@ -1,0 +1,41 @@
+<mat-toolbar>
+  <span>Cadastro</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form [formGroup]="service.form" class="normal-form">
+  <mat-grid-list cols="1" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+
+        <input type="hidden" formControlName="$key">
+
+        <mat-form-field>
+          <input formControlName="name" matInput placeholder="Nome*">
+          <mat-error>Este campo é obrigatório.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="my-2">
+          <input formControlName="email" matInput placeholder="E-mail*">
+          <mat-error *ngIf="service.form.controls['email'].errors?.email">Formato de e-mail inválido.</mat-error>
+          <mat-error *ngIf="service.form.controls['email'].errors?.required">Este campo é obrigatório.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="mb-3">
+          <input formControlName="senha" matInput placeholder="Senha*">
+          <mat-error *ngIf="service.form.controls['senha'].errors?.required">Este campo é obrigatório.</mat-error>
+          <mat-error *ngIf="service.form.controls['senha'].errors?.minlength">Mínimo de oito caracteres</mat-error>
+        </mat-form-field>
+
+        <div>
+          <button class="col-md-2 ml-0 mr-3 btn-cadastro" mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Cadastre-se</button>
+          <button class="col-md-2 ml-0 mr-3 btn-cadastro" mat-raised-button color="warn" (click)="onClear()">Limpar</button>
+        </div>
+
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
