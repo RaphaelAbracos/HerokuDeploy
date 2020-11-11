@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-cadastro-lembrete',
   templateUrl: './cadastro-lembrete.component.html',
