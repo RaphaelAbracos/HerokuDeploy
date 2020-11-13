@@ -6,7 +6,7 @@
   </button>
 </mat-toolbar>
 
-<form (submit)="onAdicionarUsuario()" [formGroup]="service.form" class="normal-form" #clienteForm="ngForm">
+<form (submit)="onAdicionarUsuario(usuarioForm)" [formGroup]="service.form" class="normal-form" #usuarioForm="ngForm">
   <mat-grid-list cols="1" rowHeight="300px">
     <mat-grid-tile>
       <div class="controles-container">
