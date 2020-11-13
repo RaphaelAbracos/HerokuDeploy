@@ -26,6 +26,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import {MatInputModule} from '@angular/material/input';
 import { RootComponentComponent } from './root-component/root-component.component';
+import { HttpClient, HttpClientModule} from '@angular/common/http'
+
+import { UsuarioService } from '../app/Usuario/usuario.service'
 
 @NgModule({
   declarations: [
@@ -54,7 +57,6 @@ import { RootComponentComponent } from './root-component/root-component.componen
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-
     MatToolbarModule,
     BrowserModule,
     ReactiveFormsModule,
@@ -62,10 +64,10 @@ import { RootComponentComponent } from './root-component/root-component.componen
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    HttpClientModule,
     routing
   ],
   providers: [CadastroService],
