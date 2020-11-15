@@ -38,6 +38,7 @@ export class FormularioCadastroComponent implements OnInit {
       form.value.senha,
       form.value.email
     )
+    console.log(form.value);
     /*const usuario: Usuario = {
     nome: form.value.nome,
     senha: form.value.senha,

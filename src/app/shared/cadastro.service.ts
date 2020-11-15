@@ -10,7 +10,7 @@ export class CadastroService {
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
-    name: new FormControl('', Validators.required),
+    nome: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.email, Validators.required]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)])
   });
@@ -18,7 +18,7 @@ export class CadastroService {
   initializeFormGroup(){
     this.form.setValue({
       $key: null,
-      name: '',
+      nome: '',
       email: '',
       senha: ''
     });

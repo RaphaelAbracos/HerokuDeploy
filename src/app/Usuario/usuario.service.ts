@@ -1,11 +1,19 @@
 import { Usuario } from './usuario.model';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioService {
+  constructor(private httpClient: HttpClient) {}
+
   private usuarios: Usuario[] = [];
-  getUsuario(): Usuario[] {
-    return [...this.usuarios];
+
+  getUsuarios(): void {
+    this.httpClient
+      .get<{ usuarios: Usuario[] }>('http://localhost:3000/api/usuarios')
+      .subscribe((dados) => {
+        this.usuarios = dados.usuarios;
+      });
   }
 
   adicionarUsuario(nome: string, senha: string, email: string) {
@@ -14,6 +22,11 @@ export class UsuarioService {
       senha: senha,
       email: email,
     };
-    this.usuarios.push(usuario);
+    this.httpClient
+      .post('http://localhost:3000/api/usuarios', usuario)
+      .subscribe((dados) => {
+        console.log(dados);
+        this.usuarios.push(usuario);
+      });
   }
 }
