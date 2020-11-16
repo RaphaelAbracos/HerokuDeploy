@@ -23,12 +23,14 @@ import { FormularioCadastroComponent } from './cadastro/formulario-cadastro/form
 import { CadastroService } from './shared/cadastro.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import {MatInputModule} from '@angular/material/input';
 import { RootComponentComponent } from './root-component/root-component.component';
-import { HttpClient, HttpClientModule} from '@angular/common/http'
+import { HttpClientModule} from '@angular/common/http'
 
 import { UsuarioService } from '../app/Usuario/usuario.service'
+import { LembreteService } from '../app/Lembrete/lembrete.service'
 
 @NgModule({
   declarations: [
@@ -68,9 +70,10 @@ import { UsuarioService } from '../app/Usuario/usuario.service'
     ReactiveFormsModule,
     MatInputModule,
     HttpClientModule,
+    MatExpansionModule,
     routing
   ],
-  providers: [CadastroService],
+  providers: [LembreteService ,CadastroService],
   bootstrap: [AppComponent],
   entryComponents: [FormularioCadastroComponent]
 })
