@@ -9,14 +9,14 @@
   >
     <mat-toolbar> <mat-icon> home </mat-icon>⠀ Menu </mat-toolbar>
     <mat-nav-list>
+      <a mat-list-item routerLink="dashboardList"
+        ><mat-icon>event_note</mat-icon>⠀Meus Lembretes</a
+      >
       <a mat-list-item routerLink="cadastro"
         ><mat-icon>event_available</mat-icon>⠀Cadastrar</a
       >
       <a mat-list-item routerLink="excluir"
         ><mat-icon>event_busy</mat-icon>⠀Excluir</a
-      >
-      <a mat-list-item routerLink="dashboardList"
-        ><mat-icon>event_note</mat-icon>⠀Meus Lembretes</a
       >
     </mat-nav-list>
   </mat-sidenav>
@@ -31,7 +31,7 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Nome do projeto aqui</span>
+      <span>AnoteAqui</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

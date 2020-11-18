@@ -13,6 +13,7 @@ const APP_ROUTES: Routes = [
     {path: 'excluir', component: ExcluirLembreteComponent},
     {path: 'cadastro', component: CadastroLembreteComponent},
     {path: 'dashboardList', component: DbContentComponent },
+    {path: 'editar/:idLembrete', component: CadastroLembreteComponent}
   ]},
   {path: '', component: FormularioLoginComponent},
   {path: 'login', redirectTo:'', pathMatch: 'full'}

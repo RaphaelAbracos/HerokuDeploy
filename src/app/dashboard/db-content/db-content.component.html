@@ -1,23 +1,26 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
+  <h1 class="mat-h1 h1" style="color: #69F0AE;">Lembretes</h1>
   <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile *ngFor="let lembrete of lembretes">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            {{lembrete.nome}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
+              <p class="titulo mat-title">
+                {{lembrete.nome}}
+              </p>
+            <button mat-icon-button color="accent" class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>menu</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Editar</button>
-              <button mat-menu-item>Excluir</button>
+              <button mat-fab color="accent"[routerLink]="['/mainMenu/editar', lembrete.id]" ><mat-icon>create</mat-icon></button>
+              <button mat-fab color="warn" (click)="onDelete(lembrete.id)"><mat-icon>delete</mat-icon></button>
             </mat-menu>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
           <p>{{lembrete.descricao}}</p>
-          <p>{{lembrete.data}}</p>
+          <p>Data de conclusão {{lembrete.data | date:'shortDate':'UTC':'Br'}}</p>
+          <p>Criação:{{lembrete.dataInicial | date:'shortDate':'UTC-3':'Br'}}</p>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

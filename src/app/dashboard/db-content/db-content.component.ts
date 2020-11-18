@@ -4,6 +4,9 @@ import { LembreteService } from '../../Lembrete/lembrete.service';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { registerLocaleData } from '@angular/common';
+import localeBr from '@angular/common/locales/br';
 
 @Component({
   selector: 'app-db-content',
@@ -12,11 +15,12 @@ import { Subscription } from 'rxjs';
 })
 export class DbContentComponent implements OnInit, OnDestroy {
   /** Based on the screen size, switch from standard to one column per row */
-  constructor(private breakpointObserver: BreakpointObserver, public LembreteService: LembreteService) {}
+  constructor(private breakpointObserver: BreakpointObserver, public LembreteService: LembreteService, private route: ActivatedRoute, private router: Router) {}
   lembretes: Lembrete[] = [];
   private lembreteSubscription: Subscription;
 
   ngOnInit(): void{
+    registerLocaleData(localeBr, 'Br');
     this.LembreteService.getLembretes();
     this.lembreteSubscription = this.LembreteService
       .getListaDeLembretesAtualizadaObservable()
@@ -27,6 +31,10 @@ export class DbContentComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void{
     this.lembreteSubscription.unsubscribe();
+  }
+
+  onDelete(id: string){
+    this.LembreteService.removerLembrete(id);
   }
 
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(

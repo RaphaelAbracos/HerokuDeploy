@@ -24,7 +24,7 @@ const usuario = [];
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, PUT, OPTIONS');
   next()
 });
 
@@ -41,16 +41,15 @@ app.post("/api/usuarios", (req, res, next) => {
 
 app.use("/api/usuarios", (req, res, next) => {
   res.status(200).json(usuario);
-  console.log("salve53")
 });
 
 //======================================================================================
 //backend de lembrete
 
-app.use("/api/lembretes", (req, res, next) => {
-  //res.status(200).json(lembrete);
+/* app.use("/api/lembretes", (req, res, next) => {
   next()
-});
+}); */
+
 const lembrete = [];
 app.post("/api/lembretes", (req, res, next) => {
   const lembrete = new Lembrete({
@@ -66,11 +65,42 @@ app.post("/api/lembretes", (req, res, next) => {
 
 app.get('/api/lembretes', (req, res, next) => {
   Lembrete.find().then(documents => {
-    console.log(documents);
+    /* console.log(documents); */
     res.status(200).json({
       lembretes: documents
     });
   })
 });
+
+app.get('/api/lembretes/:id', (req, res, next) => {
+  Lembrete.findById(req.params.id).then(lem => {
+    if (lem) {
+      res.status(200).json(lem);
+    }
+    else
+      res.status(404).json({ mensagem: "Cliente não encontrado!" })
+  })
+});
+
+app.delete ('/api/lembretes/:id', (req, res, next) => {
+  Lembrete.deleteOne({_id: req.params.id}).then((resultado) => {
+    /* console.log(resultado); */
+    res.status(200).json({mensagem: "Cliente removido"});
+  })
+});
+app.put("/api/lembretes/:id", (req, res, next) => {
+  const lembrete = new Lembrete({
+  _id: req.params.id,
+  nome: req.body.nome,
+  descricao: req.body.descricao,
+  data: req.body.data,
+  dataInicial: req.body.dataInicial
+  });
+  Lembrete.updateOne({_id: req.params.id}, lembrete)
+  .then ((resultado) => {
+  console.log (resultado)
+  });
+  res.status(200).json({mensagem: 'Atualização realizada com sucesso'})
+  });
 
 module.exports = app;
