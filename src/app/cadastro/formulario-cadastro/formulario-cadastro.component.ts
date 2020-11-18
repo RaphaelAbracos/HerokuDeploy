@@ -31,6 +31,7 @@ export class FormularioCadastroComponent implements OnInit {
     this.service.initializeFormGroup();
     this.dialogRef.close();
   }
+  
   onAdicionarUsuario(form: NgForm) {
 
     this.usuarioService.adicionarUsuario(
