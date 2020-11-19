@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioService {
+
   constructor(private httpClient: HttpClient) {}
 
   private usuarios: Usuario[] = [];
@@ -29,4 +30,38 @@ export class UsuarioService {
         this.usuarios.push(usuario);
       });
   }
+
+  logar(email: string, senha: string){
+    console.log("usuario service lgoar");
+    const usuario: Usuario = {
+      nome: "a",
+      senha: senha,
+      email: email,
+    };
+    console.log(usuario.email);
+    console.log(usuario.nome);
+    console.log(usuario.senha);
+
+    //this.httpClient
+    //.post('http://localhost:3000/logar', usuario);
+
+    console.log(JSON.stringify(usuario));
+    console.log("------------");
+    //this.httpClient.post<Usuario>('http://localhost:3000/logar', JSON.stringify(usuario));
+
+    this.httpClient.post(`http://localhost:3000/logar`, usuario)
+    .subscribe(
+      resultado => {
+        console.log(resultado)
+      },
+      erro => {
+        if(erro.status == 400) {
+          console.log(erro);
+        }
+      }
+    );
+
+    
+    
+  };
 }
