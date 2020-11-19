@@ -1,16 +1,42 @@
-<form class="example-form">
+<form [formGroup]="form" (submit)="onAdicionarLembrete()" class="example-form">
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Nome do lembrete</mat-label>
-    <input matInput placeholder="Ex. Estudar" />
+    <input
+      matInput
+      placeholder="Ex. Estudar"
+      name="nome"
+      formControlName="nome"
+      required
+      minlength="3"
+      type="text"
+    />
+    <mat-error *ngIf="form.get('nome').invalid"
+      >Digite o nome do lembrete</mat-error
+    >
   </mat-form-field>
 
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Descrição</mat-label>
-    <textarea matInput placeholder="Ex. Estudar Função Sigmoide"></textarea>
+    <input
+      type="text"
+      matInput
+      placeholder="Ex. Estudar Matemática as 10:00"
+      name="descricao"
+      formControlName="descricao"
+      required
+      minlength="3"
+      maxlength="150"
+    />
+    <mat-error *ngIf="form.get('descricao').invalid"
+      >Digite a descrição do lembrete</mat-error
+    >
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Data de Conclusão</mat-label>
-    <input matInput type="date" />
+    <input matInput disabled [matDatepicker]="data" name="data" formControlName="data" />
+    <mat-datepicker-toggle matSuffix [for]="data"></mat-datepicker-toggle>
+    <mat-datepicker #data [disabled]="false"></mat-datepicker>
+    <mat-error *ngIf="form.get('data').invalid">Selecione uma data</mat-error>
   </mat-form-field>
   <button mat-raised-button color="primary">Cadastrar Lembrete</button>
 </form>

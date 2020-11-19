@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { FormularioLoginComponent } from './Login/formulario-login/formulario-login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,14 +21,20 @@ import { routing } from './app.routing';
 import { ExcluirLembreteComponent } from './dashboard/excluir-lembrete/excluir-lembrete.component';
 import { FormularioCadastroComponent } from './cadastro/formulario-cadastro/formulario-cadastro.component';
 import { CadastroService } from './shared/cadastro.service';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 
-import {MatInputModule} from '@angular/material/input';
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+
+import { MatInputModule } from '@angular/material/input';
 import { RootComponentComponent } from './root-component/root-component.component';
-import { HttpClient, HttpClientModule} from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 
-import { UsuarioService } from '../app/Usuario/usuario.service'
+import { UsuarioService } from '../app/Usuario/usuario.service';
+import { LembreteService } from '../app/Lembrete/lembrete.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +51,6 @@ import { UsuarioService } from '../app/Usuario/usuario.service'
     CadastroLembreteComponent,
     ExcluirLembreteComponent,
     RootComponentComponent,
-
   ],
   imports: [
     BrowserAnimationsModule,
@@ -68,10 +73,14 @@ import { UsuarioService } from '../app/Usuario/usuario.service'
     ReactiveFormsModule,
     MatInputModule,
     HttpClientModule,
+    RouterModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     routing
   ],
-  providers: [CadastroService],
+  providers: [LembreteService, CadastroService, MatDatepickerModule],
   bootstrap: [AppComponent],
-  entryComponents: [FormularioCadastroComponent]
+  entryComponents: [FormularioCadastroComponent],
 })
-export class AppModule { }
+export class AppModule {}

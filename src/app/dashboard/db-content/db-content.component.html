@@ -1,24 +1,51 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
+  <h1 class="mat-h1 h1" style="color: #69F0AE;">Lembretes</h1>
   <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+    <mat-grid-tile *ngFor="let lembrete of lembretes">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
+              <p class="titulo mat-title">
+                {{lembrete.nome}}
+              </p>
+            <button mat-icon-button color="accent" class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>menu</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
+              <button mat-fab color="accent"[routerLink]="['/mainMenu/editar', lembrete.id]" ><mat-icon>create</mat-icon></button>
+              <button mat-fab color="warn" (click)="onDelete(lembrete.id)"><mat-icon>delete</mat-icon></button>
             </mat-menu>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
+          <p>{{lembrete.descricao}}</p>
+          <p>Data de conclusão {{lembrete.data | date:'shortDate':'UTC':'Br'}}</p>
+          <p>Criação:{{lembrete.dataInicial | date:'shortDate':'UTC-3':'Br'}}</p>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
+
+
+
+
+
+
+
+
+<!-- <mat-accordion *ngIf="lembretes.length > 0">
+  <mat-expansion-panel *ngFor="let lembrete of lembretes">
+    <mat-expansion-panel-header>Nome: {{ lembrete.nome }}</mat-expansion-panel-header>
+    <p>Descricao: {{ lembrete.descricao }}</p>
+
+    <p>Data: {{ lembrete.data }}</p>
+    <mat-action-row>
+      <button mat-button color="primary">EDITAR</button>
+      <button mat-button color="warn">REMOVER</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="mat-body-1" style="text-align: center;" *ngIf="lembretes.length <= 0">
+  Nenhum cliente cadastrado
+</p> -->

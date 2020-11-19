@@ -23,6 +23,7 @@ export class UsuarioService {
       senha: senha,
       email: email,
     };
+    console.log(usuario);
     this.httpClient
       .post('http://localhost:3000/api/usuarios', usuario)
       .subscribe((dados) => {

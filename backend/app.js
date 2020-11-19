@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const Usuario = require("./models/usuario");
 const mongoose = require("mongoose");
+const Lembrete = require("./models/lembrete");
+const Usuario = require("./models/usuario");
 
 const authConfig = require("../backend/models/auth");
 const autMiddleware = require("./auth.js");
@@ -27,22 +28,18 @@ mongoose
     console.log("Conexão NOK");
   });
 
+app.use(express.json());
 const usuario = [];
 
 app.use(cors({origin:true,credentials: true}));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
-  );
-  next();
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, PUT, OPTIONS');
+  next()
 });
+
 
 function generateToken(params = {}) {
   return jwt.sign(params, authConfig.secret, {
@@ -78,7 +75,6 @@ app.post("/logar", async (req, res, next) => {
   }
 });
 
-//const total;
 app.post("/api/usuarios", (req, res, next) => {
   const usuario = new Usuario({
     nome: req.body.nome,
@@ -91,9 +87,11 @@ app.post("/api/usuarios", (req, res, next) => {
 });
 
 app.use("/api/usuarios", (req, res, next) => {
-  //res.send("Hello from back end")
   res.status(200).json(usuario);
 });
+
+
+
 
 //A PARTIR DAQUI VALIDA SESSAO
 app.use(autMiddleware);
@@ -101,5 +99,66 @@ app.use(autMiddleware);
 app.use("/bruno", (req, res, next) => {
   res.send({ ok: true, nome: req.userId });
 });
+
+//======================================================================================
+//backend de lembrete
+
+/* app.use("/api/lembretes", (req, res, next) => {
+  next()
+}); */
+
+const lembrete = [];
+app.post("/api/lembretes", (req, res, next) => {
+  const lembrete = new Lembrete({
+    nome: req.body.nome,
+    descricao: req.body.descricao,
+    data: req.body.data,
+    dataInicial: req.body.dataInicial
+  });
+  lembrete.save();
+  res.status(200).json(lembrete);
+  console.log(lembrete);
+});
+
+app.get('/api/lembretes', (req, res, next) => {
+  Lembrete.find().then(documents => {
+    /* console.log(documents); */
+    res.status(200).json({
+      lembretes: documents
+    });
+  })
+});
+
+app.get('/api/lembretes/:id', (req, res, next) => {
+  Lembrete.findById(req.params.id).then(lem => {
+    if (lem) {
+      res.status(200).json(lem);
+    }
+    else
+      res.status(404).json({ mensagem: "Cliente não encontrado!" })
+  })
+});
+
+app.delete ('/api/lembretes/:id', (req, res, next) => {
+  Lembrete.deleteOne({_id: req.params.id}).then((resultado) => {
+    /* console.log(resultado); */
+    res.status(200).json({mensagem: "Cliente removido"});
+  })
+});
+app.put("/api/lembretes/:id", (req, res, next) => {
+  const lembrete = new Lembrete({
+  _id: req.params.id,
+  nome: req.body.nome,
+  descricao: req.body.descricao,
+  data: req.body.data,
+  dataInicial: req.body.dataInicial
+  });
+  Lembrete.updateOne({_id: req.params.id}, lembrete)
+  .then ((resultado) => {
+  console.log (resultado)
+  });
+  res.status(200).json({mensagem: 'Atualização realizada com sucesso'})
+  });
+
 
 module.exports = app;
