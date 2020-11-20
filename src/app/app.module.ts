@@ -24,10 +24,10 @@ import { CadastroService } from './shared/cadastro.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
-
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { MatInputModule } from '@angular/material/input';
 import { RootComponentComponent } from './root-component/root-component.component';
@@ -77,9 +77,15 @@ import { LembreteService } from '../app/Lembrete/lembrete.service';
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    routing
+    routing,
   ],
-  providers: [LembreteService, CadastroService, MatDatepickerModule],
+  providers: [
+    LembreteService,
+    CadastroService,
+    MatDatepickerModule,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+  ],
   bootstrap: [AppComponent],
   entryComponents: [FormularioCadastroComponent],
 })

@@ -47,5 +47,8 @@ export class FormularioCadastroComponent implements OnInit {
     this.usuarioAdicionado.emit(usuario);
     */
     form.resetForm();
+    this.onClose();
+    
+    alert("Usuário cadastrado com sucesso!");
     }
 }

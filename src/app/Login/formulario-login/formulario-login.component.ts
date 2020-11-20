@@ -35,16 +35,15 @@ export class FormularioLoginComponent implements OnInit {
   }
 
   onLogar(form: NgForm) {
-    this.usuarioService.logar(form.value.email, form.value.senha);
-    console.log(form.value);
-    /*const usuario: Usuario = {
-    nome: form.value.nome,
-    senha: form.value.senha,
-    email: form.value.email,
-    };
-    this.usuarioAdicionado.emit(usuario);
-    */
-    form.resetForm();
-    this.router.navigate(['/mainMenu/dashboardList']);
+
+    this.usuarioService.logar(form.value.email, form.value.senha)
+      .subscribe((response: any)=>{
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('user', JSON.stringify(response.usuario));
+    
+        form.resetForm();
+        this.router.navigate(['/mainMenu/dashboardList']);
+      })
+  
   }
 }

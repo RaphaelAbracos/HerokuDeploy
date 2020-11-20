@@ -1,6 +1,6 @@
 import { Lembrete } from './lembrete.model';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -11,14 +11,22 @@ export class LembreteService {
 
   private lembretes: Lembrete[] = [];
   private listaLembretesAtualizada = new Subject<Lembrete[]>();
-
-
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    }),
+  };
 
   getLembrete(idLembretes: string) {
     //return {...this.clientes.find((cli) => cli.id === idCliente)};
     return this.httpClient.get<{
-      _id: string, nome: string, descricao: string, data: Date, dataInicial: Date
-    }>(`http://localhost:3000/api/lembretes/${idLembretes}`);
+      _id: string;
+      nome: string;
+      descricao: string;
+      data: Date;
+      dataInicial: Date;
+    }>(`http://localhost:3000/api/lembretes/${idLembretes}`,this.httpOptions);
   }
   /* getLembretes(): void {
     this.httpClient
@@ -28,37 +36,38 @@ export class LembreteService {
       });
   } */
   getLembretes(): void {
-    this.httpClient.get<{lembretes: any}>(
-      'http://localhost:3000/api/lembretes'
-    )
-    .pipe(map((dados) => {
-      return dados.lembretes.map(lem => {
-        return {
-          id: lem._id,
-          nome: lem.nome,
-          descricao: lem.descricao,
-          data: lem.data,
-          dataInicial: lem.dataInicial
-        }
-      })
-    }))
-    .subscribe((clientes) => {
-      this.lembretes = clientes
-      this.listaLembretesAtualizada.next([...this.lembretes])
-    })
+    this.httpClient
+      .get<{ lembretes: any }>('http://localhost:3000/api/lembretes',this.httpOptions)
+      .pipe(
+        map((dados) => {
+          return dados.lembretes.map((lem) => {
+            return {
+              id: lem._id,
+              nome: lem.nome,
+              descricao: lem.descricao,
+              data: lem.data,
+              dataInicial: lem.dataInicial,
+            };
+          });
+        })
+      )
+      .subscribe((clientes) => {
+        this.lembretes = clientes;
+        this.listaLembretesAtualizada.next([...this.lembretes]);
+      });
     //return [...this.clientes];
   }
 
   adicionarLembrete(nome: string, descricao: string, data: Date) {
     const lembrete: Lembrete = {
-      id:null,
+      id: null,
       nome: nome,
       descricao: descricao,
       data: data,
-      dataInicial: new Date()
+      dataInicial: new Date(),
     };
     this.httpClient
-      .post("http://localhost:3000/api/lembretes", lembrete)
+      .post('http://localhost:3000/api/lembretes', lembrete, this.httpOptions)
       .subscribe((dados) => {
         this.lembretes.push(lembrete);
         this.listaLembretesAtualizada.next([...this.lembretes]);
@@ -70,26 +79,33 @@ export class LembreteService {
   }
 
   removerLembrete(id: string): void {
-    this.httpClient.delete(
-      `http://localhost:3000/api/lembretes/${id}`
-    ).subscribe(() => {
-      this.lembretes = this.lembretes.filter((lem) => {
-        return lem.id !== id;
-      })
-      this.listaLembretesAtualizada.next([...this.lembretes]);
-    });
+    this.httpClient
+      .delete(`http://localhost:3000/api/lembretes/${id}`,this.httpOptions)
+      .subscribe(() => {
+        this.lembretes = this.lembretes.filter((lem) => {
+          return lem.id !== id;
+        });
+        this.listaLembretesAtualizada.next([...this.lembretes]);
+      });
   }
 
-  atualizarLembrete(id: string, nome: string, descricao: string, data: Date, dataInicial: Date) {
-    const lembrete: Lembrete = { id, nome, descricao, data , dataInicial };
-    this.httpClient.put(`http://localhost:3000/api/lembretes/${id}`, lembrete)
-      .subscribe((res => {
+  atualizarLembrete(
+    id: string,
+    nome: string,
+    descricao: string,
+    data: Date,
+    dataInicial: Date
+  ) {
+    const lembrete: Lembrete = { id, nome, descricao, data, dataInicial };
+    this.httpClient
+      .put(`http://localhost:3000/api/lembretes/${id}`, lembrete,this.httpOptions)
+      .subscribe((res) => {
         const copia = [...this.lembretes];
-        const indice = copia.findIndex(lem => lem.id === lembrete.id);
+        const indice = copia.findIndex((lem) => lem.id === lembrete.id);
         copia[indice] = lembrete;
         this.lembretes = copia;
         this.listaLembretesAtualizada.next([...this.lembretes]);
         this.router.navigate(['/mainMenu/dashboardList']);
-      }));
+      });
   }
 }

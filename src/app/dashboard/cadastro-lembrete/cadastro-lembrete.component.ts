@@ -71,7 +71,7 @@ export class CadastroLembreteComponent implements OnInit {
       )
     }
     this.form.reset();
-    this.router.navigate(['/mainMenu/dashboardList'])
+    this.router.navigate(['/mainMenu/dashboardList']);
   }
 
 }

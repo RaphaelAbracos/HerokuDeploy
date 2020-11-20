@@ -8,9 +8,7 @@ const Usuario = require("./models/usuario");
 const authConfig = require("../backend/models/auth");
 const autMiddleware = require("./auth.js");
 
-const cors=require('cors');
-
-
+const cors = require("cors");
 
 const jwt = require("jsonwebtoken");
 app.use(bodyParser.json());
@@ -31,15 +29,20 @@ mongoose
 app.use(express.json());
 const usuario = [];
 
-app.use(cors({origin:true,credentials: true}));
+app.use(cors({ origin: true, credentials: true }));
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, PUT, OPTIONS');
-  next()
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, DELETE, PUT, OPTIONS"
+  );
+  next();
 });
-
 
 function generateToken(params = {}) {
   return jwt.sign(params, authConfig.secret, {
@@ -49,7 +52,6 @@ function generateToken(params = {}) {
 
 app.post("/logar", async (req, res, next) => {
   try {
-    console.log("rafael é feio");
     const { email, senha } = req.body;
 
     const user = await await Usuario.findOne({ email });
@@ -60,16 +62,19 @@ app.post("/logar", async (req, res, next) => {
       return res.status(400).send({ error: "Senha Invalida" });
 
     user.senha = undefined;
-//, nome: user.nome,  email
-    const token = jwt.sign({ id: user.id}, authConfig.secret, {
+    //, nome: user.nome,  email
+    const token = jwt.sign({ id: user.id }, authConfig.secret, {
       expiresIn: 86400,
     });
 
     console.log(user.id);
 
-    res.send({ user, token: generateToken({ id: user.id }) });
+    console.log("antes return logar");
 
-    
+   
+
+    return res.send({ user, token: generateToken({ id: user.id }) });
+
   } catch (err) {
     next(err);
   }
@@ -89,7 +94,6 @@ app.post("/api/usuarios", (req, res, next) => {
 app.use("/api/usuarios", (req, res, next) => {
   res.status(200).json(usuario);
 });
-
 
 
 
@@ -113,52 +117,48 @@ app.post("/api/lembretes", (req, res, next) => {
     nome: req.body.nome,
     descricao: req.body.descricao,
     data: req.body.data,
-    dataInicial: req.body.dataInicial
+    dataInicial: req.body.dataInicial,
   });
   lembrete.save();
   res.status(200).json(lembrete);
   console.log(lembrete);
 });
 
-app.get('/api/lembretes', (req, res, next) => {
-  Lembrete.find().then(documents => {
+app.get("/api/lembretes", (req, res, next) => {
+  Lembrete.find().then((documents) => {
     /* console.log(documents); */
     res.status(200).json({
-      lembretes: documents
+      lembretes: documents,
     });
-  })
+  });
 });
 
-app.get('/api/lembretes/:id', (req, res, next) => {
-  Lembrete.findById(req.params.id).then(lem => {
+app.get("/api/lembretes/:id", (req, res, next) => {
+  Lembrete.findById(req.params.id).then((lem) => {
     if (lem) {
       res.status(200).json(lem);
-    }
-    else
-      res.status(404).json({ mensagem: "Cliente não encontrado!" })
-  })
+    } else res.status(404).json({ mensagem: "Cliente não encontrado!" });
+  });
 });
 
-app.delete ('/api/lembretes/:id', (req, res, next) => {
-  Lembrete.deleteOne({_id: req.params.id}).then((resultado) => {
+app.delete("/api/lembretes/:id", (req, res, next) => {
+  Lembrete.deleteOne({ _id: req.params.id }).then((resultado) => {
     /* console.log(resultado); */
-    res.status(200).json({mensagem: "Cliente removido"});
-  })
+    res.status(200).json({ mensagem: "Cliente removido" });
+  });
 });
 app.put("/api/lembretes/:id", (req, res, next) => {
   const lembrete = new Lembrete({
-  _id: req.params.id,
-  nome: req.body.nome,
-  descricao: req.body.descricao,
-  data: req.body.data,
-  dataInicial: req.body.dataInicial
+    _id: req.params.id,
+    nome: req.body.nome,
+    descricao: req.body.descricao,
+    data: req.body.data,
+    dataInicial: req.body.dataInicial,
   });
-  Lembrete.updateOne({_id: req.params.id}, lembrete)
-  .then ((resultado) => {
-  console.log (resultado)
+  Lembrete.updateOne({ _id: req.params.id }, lembrete).then((resultado) => {
+    console.log(resultado);
   });
-  res.status(200).json({mensagem: 'Atualização realizada com sucesso'})
-  });
-
+  res.status(200).json({ mensagem: "Atualização realizada com sucesso" });
+});
 
 module.exports = app;

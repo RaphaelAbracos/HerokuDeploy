@@ -9,6 +9,9 @@ export class UsuarioService {
 
   private usuarios: Usuario[] = [];
 
+  public usuario: Usuario;
+  public token: string;
+
   getUsuarios(): void {
     this.httpClient
       .get<{ usuarios: Usuario[] }>('http://localhost:3000/api/usuarios')
@@ -33,36 +36,12 @@ export class UsuarioService {
   }
 
   logar(email: string, senha: string){
-    console.log("usuario service lgoar");
     const usuario: Usuario = {
       nome: "a",
       senha: senha,
       email: email,
     };
-    console.log(usuario.email);
-    console.log(usuario.nome);
-    console.log(usuario.senha);
-
-    //this.httpClient
-    //.post('http://localhost:3000/logar', usuario);
-
-    console.log(JSON.stringify(usuario));
-    console.log("------------");
-    //this.httpClient.post<Usuario>('http://localhost:3000/logar', JSON.stringify(usuario));
-
-    this.httpClient.post(`http://localhost:3000/logar`, usuario)
-    .subscribe(
-      resultado => {
-        console.log(resultado)
-      },
-      erro => {
-        if(erro.status == 400) {
-          console.log(erro);
-        }
-      }
-    );
-
-    
-    
+    return this.httpClient.post(`http://localhost:3000/logar`, usuario);  
   };
+
 }
