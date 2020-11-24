@@ -49,7 +49,7 @@ export class FormularioLoginComponent implements OnInit {
     this.usuarioService.logar(form.value.email, form.value.senha)
       .subscribe((response: any)=>{
         localStorage.setItem('token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.usuario));
+        localStorage.setItem('user', response.idUsuario);
 
         form.resetForm();
         this.router.navigate(['/mainMenu/dashboardList']);

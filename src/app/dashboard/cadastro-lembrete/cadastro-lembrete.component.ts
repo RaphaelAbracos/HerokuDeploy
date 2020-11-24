@@ -56,6 +56,7 @@ export class CadastroLembreteComponent implements OnInit {
               descricao: dadosLem.descricao,
               data: dadosLem.data,
               dataInicial: dadosLem.dataInicial,
+              idUsuario: dadosLem.idUsuario
             };
           });
       } else {
@@ -71,7 +72,8 @@ export class CadastroLembreteComponent implements OnInit {
       this.lembreteService.adicionarLembrete(
         this.form.value.nome,
         this.form.value.descricao,
-        this.form.value.data
+        this.form.value.data,
+        localStorage.getItem('user')
       );
       this._snackBar.open('Lembrete cadastrado', '', {
         duration: 2000,
@@ -84,13 +86,16 @@ export class CadastroLembreteComponent implements OnInit {
         this.form.value.nome,
         this.form.value.descricao,
         this.form.value.data,
-        new Date()
+        new Date(),
+        localStorage.getItem('user')
       );
+      
       this._snackBar.open('Lembrete Atualizado', '', {
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
       });
+
     }
     this.form.reset();
     this.router.navigate(['/mainMenu/dashboardList']);

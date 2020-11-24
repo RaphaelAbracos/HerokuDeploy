@@ -33,9 +33,12 @@ export class DbContentComponent implements OnInit, OnDestroy {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   ngOnInit(): void {
     registerLocaleData(localeBr, 'Br');
-    this.LembreteService.getLembretes();
-    this.lembreteSubscription = this.LembreteService.getListaDeLembretesAtualizadaObservable().subscribe(
-      (lembretes: Lembrete[]) => {
+
+    this.LembreteService.getLembretes(localStorage.getItem('user'));
+    this.lembreteSubscription = this.LembreteService
+      .getListaDeLembretesAtualizadaObservable()
+      .subscribe((lembretes: Lembrete[]) => {
+
         this.lembretes = lembretes;
       }
     );

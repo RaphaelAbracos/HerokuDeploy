@@ -4,4 +4,5 @@ export interface Lembrete {
   descricao: string;
   data: Date;
   dataInicial: Date;
+  idUsuario: string;
 }
