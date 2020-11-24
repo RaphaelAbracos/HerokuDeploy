@@ -5,7 +5,13 @@ import { CadastroService } from '../../shared/cadastro.service';
 import { NgForm } from '@angular/forms';
 import { UsuarioService } from '../../Usuario/usuario.service';
 
-import { ActivatedRoute, Router } from '@angular/router'; 
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+
+import { ActivatedRoute, Router } from '@angular/router';
 
 /*import{ app} from '../../../../backend/app';
 //import { app } from '../../Usuario/usuario.service';*/
@@ -20,8 +26,12 @@ export class FormularioLoginComponent implements OnInit {
     public router: Router,
     private dialog: MatDialog,
     public service: CadastroService,
-    public usuarioService: UsuarioService
+    public usuarioService: UsuarioService,
+    private _snackBar: MatSnackBar
   ) {}
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   ngOnInit(): void {}
 
@@ -31,19 +41,26 @@ export class FormularioLoginComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
+    dialogConfig.panelClass = 'my-custom-dialog-class';
     this.dialog.open(FormularioCadastroComponent, dialogConfig);
   }
 
   onLogar(form: NgForm) {
-
     this.usuarioService.logar(form.value.email, form.value.senha)
       .subscribe((response: any)=>{
         localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response.usuario));
-    
+
         form.resetForm();
         this.router.navigate(['/mainMenu/dashboardList']);
+      }, (error)=>{
+        this._snackBar.open('Usuário e senha inválidos', '', {
+          duration: 2000,
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
+        form.resetForm();
       })
-  
+
   }
 }

@@ -1,10 +1,21 @@
 body {
     font-family: "Lato", sans-serif;
 }
+.container-fluid{
+
+}
 .roxo{
-    height: 100vh; 
-    background-color: #382465;
+    height: 100vh;
+    background-color: #4d2ab2;
     overflow-x: hidden;
+}
+.form-control{
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid gray;
+}
+textarea:focus, input:focus{
+  outline: none;
 }
 
 .texto-principal{
@@ -17,6 +28,7 @@ body {
     font-weight: 300;
 }
 
+
 .texto-principal p{
    margin-top: 60px;
 }
@@ -28,16 +40,17 @@ padding:2px;
 color:#817f81;
 border:none!important;
 background-color: white!important;
-text-decoration:none; 
+text-decoration:none;
 }
 
 .btn-login{
-    background-color: #6340B2;
+  background-color: #6340B2;
     color: #fff;
     margin-top: 40px;
     padding: 8px;
-    float: right;   
+    float: right;
 }
+
 
 @media screen and (max-width: 764px) {
     .login-form{
@@ -45,20 +58,21 @@ text-decoration:none;
     }
 .roxo{
 
-    height: 50vh; 
+    height: 50vh;
 }
 
 .links{
     font-size:12px;
-    
+
     }
 .texto-principal h2{
     font-size: 30px;
 }
 }
 
+
 @media screen and (min-width: 768px){
-  
+
 .texto-principal h2{
     font-size: 60px;
 }

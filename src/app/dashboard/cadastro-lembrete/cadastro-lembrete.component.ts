@@ -3,14 +3,18 @@ import { FormGroup, FormControl, NgForm, Validators } from '@angular/forms';
 import { Lembrete } from 'src/app/Lembrete/lembrete.model';
 import { LembreteService } from '../../Lembrete/lembrete.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-cadastro-lembrete',
   templateUrl: './cadastro-lembrete.component.html',
   styleUrls: ['./cadastro-lembrete.component.css'],
 })
 export class CadastroLembreteComponent implements OnInit {
-
-
   public modo: string = 'criar';
   private idLembrete: string;
   public lembrete: Lembrete;
@@ -19,17 +23,25 @@ export class CadastroLembreteComponent implements OnInit {
   constructor(
     public lembreteService: LembreteService,
     public route: ActivatedRoute,
-    public router: Router
-  ) {
-
-  }
-
+    public router: Router,
+    private _snackBar: MatSnackBar
+  ) {}
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   ngOnInit() {
     this.form = new FormGroup({
-      nome: new FormControl('', {validators: [Validators.required, Validators.minLength(3)]}),
-      descricao: new FormControl('', {validators: [Validators.required, Validators.maxLength(150), Validators.minLength(3)]}),
-      data: new FormControl('', {validators: [Validators.required]}),
-    })
+      nome: new FormControl('', {
+        validators: [Validators.required, Validators.minLength(3)],
+      }),
+      descricao: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.maxLength(150),
+          Validators.minLength(3),
+        ],
+      }),
+      data: new FormControl('', { validators: [Validators.required] }),
+    });
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('idLembrete')) {
@@ -61,17 +73,26 @@ export class CadastroLembreteComponent implements OnInit {
         this.form.value.descricao,
         this.form.value.data
       );
-    }else {
+      this._snackBar.open('Lembrete cadastrado', '', {
+        duration: 2000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+    } else {
       this.lembreteService.atualizarLembrete(
         this.idLembrete,
         this.form.value.nome,
         this.form.value.descricao,
         this.form.value.data,
         new Date()
-      )
+      );
+      this._snackBar.open('Lembrete Atualizado', '', {
+        duration: 2000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
     }
     this.form.reset();
     this.router.navigate(['/mainMenu/dashboardList']);
   }
-
 }

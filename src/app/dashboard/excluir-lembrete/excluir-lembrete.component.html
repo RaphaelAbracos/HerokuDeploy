@@ -1,5 +1,5 @@
 <mat-accordion *ngIf="lembretes.length > 0">
-  <mat-expansion-panel *ngFor="let lembrete of lembretes">
+  <mat-expansion-panel class="colunas" *ngFor="let lembrete of lembretes">
     <mat-expansion-panel-header>Nome: {{ lembrete.nome }}</mat-expansion-panel-header>
     <p>Descricao: {{ lembrete.descricao }}</p>
 
@@ -7,11 +7,11 @@
 
     <p>DATA INICIAL: {{lembrete.dataInicial | date:'shortDate':'UTC-3':'Br'}}</p>
     <mat-action-row>
-      <button mat-raised-button color="accent" [routerLink]="['/mainMenu/editar', lembrete.id]">EDITAR</button>
+      <button mat-raised-button style="background-color: #04d361;"  [routerLink]="['/mainMenu/editar', lembrete.id]">EDITAR</button>
       <button mat-raised-button color="warn" (click)="onDelete(lembrete.id)">REMOVER</button>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
-<p class="mat-body-1" style="text-align: center;" *ngIf="lembretes.length <= 0">
+<h1 class="lembrete-null" style="text-align: center;" *ngIf="lembretes.length <= 0">
   Nenhum Lembrete cadastrado
-</p>
+</h1>

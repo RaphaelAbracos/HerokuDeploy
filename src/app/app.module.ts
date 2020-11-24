@@ -28,6 +28,8 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 import { MatInputModule } from '@angular/material/input';
 import { RootComponentComponent } from './root-component/root-component.component';
@@ -77,6 +79,7 @@ import { LembreteService } from '../app/Lembrete/lembrete.service';
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule,
     routing,
   ],
   providers: [
