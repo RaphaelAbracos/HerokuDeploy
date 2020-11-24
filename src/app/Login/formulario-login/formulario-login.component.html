@@ -1,13 +1,61 @@
 <div class="container-fluid">
    <div class="row">
-      <div class="col-md-6 col-sm-12 roxo">
+      <div class="col-md-8 col-sm-12 roxo">
          <div class="texto-principal">
-            <h2>Bem-vindo<br> Página de Login</h2>
-
+            <h2>AnoteAqui</h2>
+            <h4>Organize suas tarefas de forma dinâmica</h4>
          </div>
       </div>
 
-      <div class="col-md-3 col-6 align-self-center offset-md-2 offset-3">
+      <div class="col-md-3 col-3 align-self-center offset-md-1 offset-1">
+        <div class="login-form">
+          <form
+          (submit)="onLogar(logarForm)"
+          [formGroup]="service.form"
+          class="normal-form "
+          #logarForm="ngForm"
+          >
+            <mat-form-field>
+              <input
+                formControlName="email"
+                matInput
+                placeholder="E-mail"
+                name="email"
+              />
+            </mat-form-field>
+
+            <mat-form-field>
+              <input
+                formControlName="senha"
+                matInput
+                placeholder="Senha"
+                type="password"
+                name="senha"
+              />
+            </mat-form-field>
+
+            <div>
+              <button
+                class="ml-0 mr-3"
+                mat-raised-button
+                color="primary"
+                (click)="onCreate()"
+              >
+                Cadastre-se
+              </button>
+              <button
+                class="ml-0 mr-3"
+                mat-raised-button
+                color="primary"
+                type="submit"
+              >
+                Entrar
+              </button>
+            </div>
+          </form>
+      </div>
+
+     <!-- <div class="col-md-3 col-6 align-self-center offset-md-2 offset-3">
          <div class="login-form">
             <form (submit)="onLogar(logarForm)" class="normal-form" #logarForm="ngForm">
                <div class="form-group">
@@ -20,13 +68,14 @@
 
                <div class="form-group">
                      <a class="links" (click)="onCreate()">Cadastrar-se</a>
-                  <!--<a class="links" href="#">Esqueci minha senha :(</a><br>-->
+                  <a class="links" href="#">Esqueci minha senha :(</a><br>
                </div>
                <div class="form-group">
                   <button type="submit" class="btn btn-login" >Entrar</button>
                </div>
             </form>
-         </div>
+         </div>-->
+      </div>
       </div>
    </div>
-</div>
+
