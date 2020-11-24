@@ -7,7 +7,8 @@ const lembreteSchema = mongoose.Schema({
   nome: { type: String, required: true },
   descricao: { type: String, required: true },
   data: { type: Date, required: true },
-  dataInicial: {type: Date, required: true}
+  dataInicial: {type: Date, required: true},
+  idUsuario: {type: String, required: true}
 });
 
 module.exports = mongoose.model("Lembrete", lembreteSchema);

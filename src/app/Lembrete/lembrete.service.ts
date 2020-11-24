@@ -26,6 +26,7 @@ export class LembreteService {
       descricao: string;
       data: Date;
       dataInicial: Date;
+      idUsuario: string;
     }>(`http://localhost:3000/api/lembretes/${idLembretes}`,this.httpOptions);
   }
   /* getLembretes(): void {
@@ -35,9 +36,9 @@ export class LembreteService {
         this.lembretes = dados.lembretes;
       });
   } */
-  getLembretes(): void {
+  getLembretes(idUsuario: string): void {
     this.httpClient
-      .get<{ lembretes: any }>('http://localhost:3000/api/lembretes',this.httpOptions)
+      .get<{ lembretes: any }>(`http://localhost:3000/api/lembretesUsers/${idUsuario}` ,this.httpOptions)
       .pipe(
         map((dados) => {
           return dados.lembretes.map((lem) => {
@@ -47,6 +48,7 @@ export class LembreteService {
               descricao: lem.descricao,
               data: lem.data,
               dataInicial: lem.dataInicial,
+              
             };
           });
         })
@@ -58,13 +60,15 @@ export class LembreteService {
     //return [...this.clientes];
   }
 
-  adicionarLembrete(nome: string, descricao: string, data: Date) {
+  adicionarLembrete(nome: string, descricao: string, data: Date, idUsuario: string) {
+    console.log("LOG: " + localStorage.getItem('user'));
     const lembrete: Lembrete = {
       id: null,
       nome: nome,
       descricao: descricao,
       data: data,
       dataInicial: new Date(),
+      idUsuario: idUsuario
     };
     this.httpClient
       .post('http://localhost:3000/api/lembretes', lembrete, this.httpOptions)
@@ -94,9 +98,10 @@ export class LembreteService {
     nome: string,
     descricao: string,
     data: Date,
-    dataInicial: Date
+    dataInicial: Date,
+    idUsuario: string
   ) {
-    const lembrete: Lembrete = { id, nome, descricao, data, dataInicial };
+    const lembrete: Lembrete = { id, nome, descricao, data, dataInicial,idUsuario};
     this.httpClient
       .put(`http://localhost:3000/api/lembretes/${id}`, lembrete,this.httpOptions)
       .subscribe((res) => {

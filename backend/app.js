@@ -73,7 +73,7 @@ app.post("/logar", async (req, res, next) => {
 
    
 
-    return res.send({ user, token: generateToken({ id: user.id }) });
+    return res.send({ idUsuario: user.id, token: generateToken({ id: user.id }) });
 
   } catch (err) {
     next(err);
@@ -118,14 +118,15 @@ app.post("/api/lembretes", (req, res, next) => {
     descricao: req.body.descricao,
     data: req.body.data,
     dataInicial: req.body.dataInicial,
+    idUsuario: req.body.idUsuario
   });
   lembrete.save();
   res.status(200).json(lembrete);
   console.log(lembrete);
 });
 
-app.get("/api/lembretes", (req, res, next) => {
-  Lembrete.find().then((documents) => {
+app.get("/api/lembretesUsers/:id", (req, res, next) => {
+  Lembrete.find({idUsuario:req.params.id}).then((documents) => {
     /* console.log(documents); */
     res.status(200).json({
       lembretes: documents,

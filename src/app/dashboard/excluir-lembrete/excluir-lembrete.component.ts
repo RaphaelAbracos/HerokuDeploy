@@ -22,7 +22,7 @@ export class ExcluirLembreteComponent implements OnInit {
 
   ngOnInit(): void{
     registerLocaleData(localeBr, 'Br');
-    this.LembreteService.getLembretes();
+    this.LembreteService.getLembretes(localStorage.getItem('user'));
     this.lembreteSubscription = this.LembreteService
       .getListaDeLembretesAtualizadaObservable()
       .subscribe((lembretes: Lembrete[]) => {
