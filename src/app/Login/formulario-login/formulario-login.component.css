@@ -1,9 +1,11 @@
 body {
-    font-family: "Lato", sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.container-fluid{
 
+.container-fluid{
+  background-color: #121214;
 }
+
 .roxo{
     height: 100vh;
     background-color: #4d2ab2;
@@ -14,9 +16,9 @@ body {
   border: 0;
   border-bottom: 2px solid gray;
 }
-textarea:focus, input:focus{
+/*textarea:focus, input:focus{
   outline: none;
-}
+}*/
 
 .texto-principal{
     margin-top: 20%;
@@ -81,4 +83,25 @@ text-decoration:none;
     padding: 15px;
 
 }
+}
+
+
+/*::-webkit-input-placeholder {
+  color: red;
+}
+
+:-moz-placeholder { /* Firefox 18- /
+  color: red;
+}
+
+::-moz-placeholder {  / Firefox 19+
+  color: red;
+}
+
+:-ms-input-placeholder {
+  color: red;
+}*/
+
+.mat-form-field-empty.mat-form-field-label {
+  color: green;
 }
