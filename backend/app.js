@@ -15,8 +15,8 @@ app.use(bodyParser.json());
 
 mongoose
   .connect(
-    //"mongodb://admin:usabilidade123@cluster0-shard-00-00.sqgup.mongodb.net:27017,cluster0-shard-00-01.sqgup.mongodb.net:27017,cluster0-shard-00-02.sqgup.mongodb.net:27017/Usuario?ssl=true&replicaSet=atlas-122jfs-shard-0&authSource=admin&retryWrites=true&w=majority",
-    "mongodb://admin:bruno123456@cluster0-shard-00-00.gnygv.mongodb.net:27017,cluster0-shard-00-01.gnygv.mongodb.net:27017,cluster0-shard-00-02.gnygv.mongodb.net:27017/Usuario?ssl=true&replicaSet=atlas-y5d7ev-shard-0&authSource=admin&retryWrites=true&w=majority",
+    "mongodb://admin:usabilidade123@cluster0-shard-00-00.sqgup.mongodb.net:27017,cluster0-shard-00-01.sqgup.mongodb.net:27017,cluster0-shard-00-02.sqgup.mongodb.net:27017/Usuario?ssl=true&replicaSet=atlas-122jfs-shard-0&authSource=admin&retryWrites=true&w=majority",
+    //"mongodb://admin:bruno123456@cluster0-shard-00-00.gnygv.mongodb.net:27017,cluster0-shard-00-01.gnygv.mongodb.net:27017,cluster0-shard-00-02.gnygv.mongodb.net:27017/Usuario?ssl=true&replicaSet=atlas-y5d7ev-shard-0&authSource=admin&retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
@@ -71,7 +71,7 @@ app.post("/logar", async (req, res, next) => {
 
     console.log("antes return logar");
 
-   
+
 
     return res.send({ idUsuario: user.id, token: generateToken({ id: user.id }) });
 

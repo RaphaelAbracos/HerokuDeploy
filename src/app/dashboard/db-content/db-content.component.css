@@ -8,6 +8,7 @@
   left: 15px;
   right: 15px;
   bottom: 15px;
+  background-color: #202024;
 }
 
 .more-button {
@@ -18,12 +19,24 @@
 
 .dashboard-card-content {
   text-align: center;
+
 }
 
 .titulo{
-  color:#69F0AE;
+  color:#4d2ab2;
 }
 
-.meun{
+.menu{
   padding: 0px;
+}
+.mat-icon-css{
+  color: #8257E5;
+}
+.editar{
+  background-color: #04d361;
+}
+.lembrete-null{
+  font-style: oblique;
+  color: #8257E5;
+  margin-top: 40px;
 }

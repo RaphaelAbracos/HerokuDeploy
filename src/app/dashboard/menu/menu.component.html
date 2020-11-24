@@ -1,10 +1,10 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>
+    <mat-toolbar class="text">
       <mat-icon> home </mat-icon>⠀ Menu
     </mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list class="text">
       <a mat-list-item routerLink="dashboardList">
         <mat-icon>event_note</mat-icon>⠀Meus Lembretes
       </a>
@@ -26,7 +26,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>AnoteAqui</span>
+      <span class="h1" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">AnoteAqui</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

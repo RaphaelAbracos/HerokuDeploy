@@ -41,7 +41,8 @@ export class UsuarioService {
       senha: senha,
       email: email,
     };
-    return this.httpClient.post(`http://localhost:3000/logar`, usuario);  
+
+    return this.httpClient.post(`http://localhost:3000/logar`, usuario);
   };
 
 }

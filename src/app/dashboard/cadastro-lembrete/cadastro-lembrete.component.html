@@ -1,4 +1,6 @@
+
 <form [formGroup]="form" (submit)="onAdicionarLembrete()" class="example-form">
+  <h1 class="mat-h1 h1" style="color: #8257E5;font-style: oblique;">Salvar Lembretes</h1>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Nome do lembrete</mat-label>
     <input
@@ -33,10 +35,16 @@
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Data de Conclusão</mat-label>
-    <input matInput disabled [matDatepicker]="data" name="data" formControlName="data" />
+    <input
+      matInput
+      disabled
+      [matDatepicker]="data"
+      name="data"
+      formControlName="data"
+    />
     <mat-datepicker-toggle matSuffix [for]="data"></mat-datepicker-toggle>
     <mat-datepicker #data [disabled]="false"></mat-datepicker>
     <mat-error *ngIf="form.get('data').invalid">Selecione uma data</mat-error>
   </mat-form-field>
-  <button mat-raised-button color="primary">Cadastrar Lembrete</button>
+  <button mat-raised-button color="primary">Salvar Lembrete</button>
 </form>
