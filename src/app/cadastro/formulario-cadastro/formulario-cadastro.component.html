@@ -27,7 +27,6 @@
             matInput
             placeholder="Nome*"
             name="nome"
-            ngModel
           />
           <mat-error>Este campo é obrigatório.</mat-error>
         </mat-form-field>
@@ -38,7 +37,6 @@
             matInput
             placeholder="E-mail*"
             name="email"
-            ngModel
           />
           <mat-error *ngIf="service.form.controls['email'].errors?.email"
             >Formato de e-mail inválido.</mat-error
@@ -55,7 +53,6 @@
             placeholder="Senha*"
             type="password"
             name="senha"
-            ngModel
           />
           <mat-error *ngIf="service.form.controls['senha'].errors?.required"
             >Este campo é obrigatório.</mat-error
