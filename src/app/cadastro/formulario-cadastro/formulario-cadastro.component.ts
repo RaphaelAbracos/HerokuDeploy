@@ -54,6 +54,8 @@ export class FormularioCadastroComponent implements OnInit {
     };
     this.usuarioAdicionado.emit(usuario);
     */
+
+    //Teste de push
     form.resetForm();
     this.onClose();
 
