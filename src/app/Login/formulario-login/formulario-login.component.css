@@ -105,3 +105,7 @@ text-decoration:none;
 .mat-form-field-empty.mat-form-field-label {
   color: green;
 }
+
+a:hover{
+  color: white;
+}

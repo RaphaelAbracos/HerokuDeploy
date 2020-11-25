@@ -58,6 +58,9 @@ export class CadastroLembreteComponent implements OnInit {
               dataInicial: dadosLem.dataInicial,
               idUsuario: dadosLem.idUsuario
             };
+            this.form.controls['nome'].setValue(this.lembrete.nome);
+            this.form.controls['descricao'].setValue(this.lembrete.descricao);
+            this.form.controls['data'].setValue(this.lembrete.data);
           });
       } else {
         this.modo = 'criar';
@@ -89,7 +92,7 @@ export class CadastroLembreteComponent implements OnInit {
         new Date(),
         localStorage.getItem('user')
       );
-      
+
       this._snackBar.open('Lembrete Atualizado', '', {
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
